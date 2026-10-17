@@ -1,0 +1,411 @@
+
+OSINT PRACTICAL EXAM — SET 1
+PRACTICAL CHEAT SHEET + THEORY WRITING
+
+FORMAT FOR EVERY EXPERIMENT:
+1. Background/Theory: 50–100 words
+2. Suitable open-source tool: around 50 words
+3. Performance steps
+4. Conclusion/result
+
+============================================================
+EXPERIMENT 1: GOOGLE DORKS + NEWS VERIFICATION
+============================================================
+
+A) PRACTICAL PERFORMANCE
+
+TOOL:
+Google Search — https://www.google.com
+
+EXAMPLE TOPIC:
+Prakash Raj case filed over Chandrayaan-3 post.
+
+SEARCH QUERIES — 8 TYPES:
+
+1. Search a website:
+site:ndtv.com
+
+2. Search a specific website and topic:
+site:ndtv.com "Prakash Raj" Chandrayaan-3
+
+3. Search PDF files:
+site:ndtv.com filetype:pdf
+
+4. Search DOC files:
+site:ndtv.com filetype:doc
+
+5. Search DOCX files:
+site:ndtv.com filetype:docx
+
+6. Search PPT files:
+site:ndtv.com filetype:ppt
+
+7. Search XLSX files:
+site:ndtv.com filetype:xlsx
+
+8. Search TXT files:
+site:ndtv.com filetype:txt
+
+EXTRA USEFUL DORKS:
+intitle:Prakash Raj Chandrayaan-3
+inurl:india-news "Prakash Raj"
+intext:"case filed" "Chandrayaan-3"
+"Prakash Raj" "Chandrayaan-3" case filed
+
+OPTIONAL KALI TOOL:
+Fast-Google-Dorks-Scan (FGDS)
+
+COMMANDS:
+cd ~/Fast-Google-Dorks-Scan
+sudo apt install bc -y
+sudo ./FGDS.sh ndtv.com
+
+STEPS:
+1. Open Google.
+2. Enter the required dork/query.
+3. Open relevant results.
+4. Record title, URL, publisher and date.
+5. Compare reports from independent news sources.
+6. Check official or primary sources where available.
+7. Record verified facts and any uncertainty.
+
+NEWS VERIFICATION LINKS:
+NDTV:
+https://www.ndtv.com/india-news/case-filed-against-actor-prakash-raj-for-mocking-chandrayaan-3-4318361
+
+India Today:
+https://www.indiatoday.in/movies/regional-cinema/story/complaint-filed-against-prakash-raj-over-tweet-on-chandraayan-3-2424799-2023-08-22
+
+The New Indian Express:
+https://www.newindianexpress.com/states/karnataka/2023/Aug/22/prakash-raj-booked-for-chandrayaan-3-tweet-actor-clarifies-it-was-a-joke-2607719.html
+
+B) THEORY TO WRITE
+
+BACKGROUND:
+Open Source Intelligence (OSINT) involves collecting and analysing publicly available information. Google Dorks use advanced search operators to locate specific webpages and files. Operators such as site:, filetype:, intitle:, inurl: and intext: narrow search results. For news verification, information is compared across independent reports and checked against primary sources where possible. This helps identify relevant information and assess credibility instead of accepting every search result as true.
+
+OPEN-SOURCE TOOL:
+Google Search is a publicly accessible search engine that supports keyword searches and advanced operators. It can locate webpages, documents and news reports related to a topic. Fast-Google-Dorks-Scan is an optional script that automates multiple Google dork searches for a domain. Search results must be manually reviewed because they may be incomplete or blocked.
+
+PERFORMANCE STEPS:
+1. Open Google Search.
+2. Enter suitable search operators.
+3. Find and open relevant results.
+4. Record URLs, publishers and dates.
+5. Cross-check the claim using other sources.
+
+CONCLUSION:
+Relevant information was found using Google Dorks and the news claim was checked against other reports.
+
+
+============================================================
+EXPERIMENT 2: REVERSE IMAGE SEARCH + GEOLOCATION
+============================================================
+
+A) PRACTICAL PERFORMANCE
+
+TOOLS:
+Google Lens:
+https://lens.google.com
+
+TinEye:
+https://tineye.com
+
+Google Maps:
+https://maps.google.com
+
+Metadata viewer:
+https://www.metadata2go.com
+
+OPTIONAL KALI COMMANDS:
+sudo apt update
+sudo apt install libimage-exiftool-perl -y
+exiftool image.jpg
+exiftool -GPSLatitude -GPSLongitude image.jpg
+
+Replace image.jpg with the actual image filename.
+
+STEPS:
+1. Save the provided image.
+2. Upload it to Google Lens or TinEye.
+3. Find matching images and possible original sources.
+4. Record matching page URLs and dates.
+5. Inspect visible clues:
+   - Road signs and street names
+   - Buildings and landmarks
+   - Road markings and traffic signs
+   - Mountains, coastlines and terrain
+   - Language on boards and shop signs
+   - Shadows and other environmental clues
+6. Compare the clues with Google Maps or Street View.
+7. If the original image is available, open it in Metadata2Go or use ExifTool.
+8. Check metadata fields:
+   - Date and time
+   - Camera/device make and model
+   - Image dimensions
+   - GPS latitude and longitude
+   - Software used to edit the image
+9. If GPS coordinates exist, enter them into a map.
+10. Cross-check at least two visual clues before reporting the likely location.
+
+IMPORTANT:
+Metadata may be missing or removed. A location cannot be confirmed from the image alone if evidence is insufficient.
+
+B) THEORY TO WRITE
+
+BACKGROUND:
+Reverse image search is an OSINT technique used to find matching images, possible original sources and earlier appearances online. Geolocation estimates where an image was captured using landmarks, road signs, buildings, terrain and metadata. EXIF metadata may contain the capture date, device details and GPS coordinates. However, metadata can be missing, altered or removed. Therefore, visual clues and metadata should be cross-checked before concluding the likely location.
+
+OPEN-SOURCE TOOL:
+Google Lens and TinEye help identify visually similar images and possible source webpages. Google Maps helps compare landmarks and streets. ExifTool is an open-source command-line utility that extracts image metadata, including GPS fields when present. These tools help investigate image origins and locations, but their results need independent verification.
+
+PERFORMANCE STEPS:
+1. Upload the image to Google Lens or TinEye.
+2. Record matching sources.
+3. Inspect landmarks, signs and road features.
+4. Check image metadata using Metadata2Go or ExifTool.
+5. Compare GPS data and visual clues with maps.
+6. Record the likely source/location and evidence.
+
+CONCLUSION:
+The image was investigated using reverse image search, metadata and visual clues to identify its possible source or location.
+
+
+============================================================
+EXPERIMENT 3: WEBSITE CRAWLING / URL DISCOVERY
+============================================================
+
+A) PRACTICAL PERFORMANCE — MAM'S EXACT EXAMPLE
+
+TOPIC:
+Case filed against Prakash Raj over Chandrayaan-3 post.
+
+TOOLS:
+WebCrawler:
+https://www.webcrawler.com
+
+Wayback Machine:
+https://web.archive.org
+
+REFERENCE NDTV ARTICLE:
+https://www.ndtv.com/india-news/case-filed-against-actor-prakash-raj-for-mocking-chandrayaan-3-4318361
+
+PART 1 — WEBCRAWLER:
+1. Open https://www.webcrawler.com
+2. Search:
+   Prakash Raj case filed against Chandrayaan-3 NDTV
+3. Open the Web results.
+4. Check the News tab if available.
+5. Identify the NDTV article and other related reports.
+6. Record the title, URL, publisher and date.
+7. Compare the results with the original NDTV article.
+
+PART 2 — WAYBACK MACHINE:
+1. Open https://web.archive.org
+2. Paste the NDTV article URL:
+   https://www.ndtv.com/india-news/case-filed-against-actor-prakash-raj-for-mocking-chandrayaan-3-4318361
+3. Click Browse History or the equivalent search button.
+4. Check whether archived snapshots are available.
+5. If snapshots exist, select a date and open the archived page.
+6. Record the available snapshot date and observations.
+7. If no snapshot exists, report that no archived copy was found.
+
+IMPORTANT:
+WebCrawler discovers relevant search results and URLs.
+Wayback Machine shows archived versions when available.
+Neither step guarantees a complete list of every internal link on a website.
+
+IF EXAMINER ASKS FOR A COMPLETE INTERNAL-LINK CRAWL:
+Use Screaming Frog SEO Spider:
+https://www.screamingfrog.co.uk/seo-spider/
+
+1. Open the tool.
+2. Enter the permitted website URL.
+3. Click Start.
+4. Review the Internal tab.
+5. Record/export discovered URLs if permitted.
+
+B) THEORY TO WRITE
+
+BACKGROUND:
+Website crawling involves discovering webpages, links and website structure. OSINT investigators use URL discovery to locate relevant pages and understand how information is organised. Search interfaces can find relevant webpages, while archive services can show historical snapshots of pages when available. A dedicated crawler systematically follows website links and lists internal URLs. Search results alone do not guarantee a complete internal-link inventory, so the tool must match the practical objective.
+
+OPEN-SOURCE TOOL:
+WebCrawler is a search interface that helps discover relevant webpages and URLs. The Internet Archive's Wayback Machine provides archived snapshots of websites when available. For a systematic internal-link crawl, Screaming Frog SEO Spider can discover URLs and display website structure. The appropriate tool depends on whether the task is finding related pages, checking historical versions or mapping internal links.
+
+PERFORMANCE STEPS:
+1. Search the Prakash Raj–Chandrayaan-3 case in WebCrawler.
+2. Record relevant URLs, including the NDTV article.
+3. Enter the NDTV URL in Wayback Machine.
+4. Inspect available historical snapshots.
+5. Record results and dates.
+6. Use a dedicated crawler if complete internal URLs are required.
+
+CONCLUSION:
+Relevant URLs were discovered and archived versions were checked where available. A dedicated crawler can be used when a complete internal-link list is required.
+
+
+============================================================
+EXPERIMENT 4: COMPETITOR ANALYSIS
+============================================================
+
+A) PRACTICAL PERFORMANCE
+
+COMPANIES:
+Samsung vs Apple
+
+TOOLS:
+Similarweb:
+https://www.similarweb.com/website/
+
+SEMrush:
+https://www.semrush.com
+
+WEBSITES TO COMPARE:
+https://www.samsung.com
+https://www.apple.com
+
+STEPS:
+1. Open Similarweb Website Analysis.
+2. Search samsung.com.
+3. Use Compare, if available, to add apple.com.
+4. Record the metrics that are actually shown.
+5. Open SEMrush if available and check keyword/SEO information.
+6. Compare the same metrics for both companies.
+7. Write evidence-based strengths and weaknesses.
+
+WHAT TO COMPARE:
+
+1. Website traffic:
+   Which website has more estimated visits?
+
+2. Traffic sources:
+   Direct, search, referral, social and other sources, where available.
+
+3. Search visibility:
+   Organic keywords, paid keywords and search traffic, where available.
+
+4. Visitor engagement:
+   Visit duration, pages per visit and bounce rate, where available.
+
+5. Geography:
+   Main visitor countries or regions, where available.
+
+6. SEO/backlinks:
+   Keyword rankings, backlinks and referring domains, if shown.
+
+7. Competitor position:
+   Which site performs better for the selected metrics?
+
+Record the date/period and any unavailable data. Free accounts may show limited information. Do not invent numbers.
+
+NOTE:
+Alexa Internet's website-ranking service was discontinued. Similarweb is a practical alternative for website traffic analysis.
+
+B) THEORY TO WRITE
+
+BACKGROUND:
+Competitor analysis studies similar companies to understand their online presence and relative performance. OSINT tools provide estimated website visits, traffic sources, visitor engagement, geographic distribution and search-keyword information. Comparing the same metrics over the same period helps identify strengths and weaknesses. These figures may be estimates, and some features may require paid access. The analyst should record the source and reporting period and avoid treating estimates as exact internal analytics.
+
+OPEN-SOURCE TOOL:
+Similarweb provides website traffic estimates, traffic-source information, engagement metrics and competitor comparison features. SEMrush helps investigate keywords, SEO performance, backlinks and competing domains. These tools support public competitive research. The available information depends on the website and account plan, so findings should be treated as estimates and compared using consistent metrics.
+
+PERFORMANCE STEPS:
+1. Open Similarweb.
+2. Enter Samsung's website.
+3. Compare with Apple's website if the option is available.
+4. Record visits, traffic sources, engagement and geography where available.
+5. Use SEMrush for keyword and SEO comparisons where available.
+6. Compare the findings and identify strengths and weaknesses.
+
+CONCLUSION:
+Samsung and Apple were compared using available website traffic and SEO indicators to identify their relative digital strengths and weaknesses.
+
+
+============================================================
+EXPERIMENT 5: COMPANY OSINT INVESTIGATION
+============================================================
+
+A) PRACTICAL PERFORMANCE
+
+COMPANY EXAMPLE: SAMSUNG
+
+USE THESE 7 LINKS:
+
+1. Official website:
+https://www.samsung.com
+
+2. Company overview / About Samsung:
+https://www.samsung.com/in/about-us/
+
+3. Investor Relations:
+https://www.samsung.com/global/ir/
+
+4. Financial results and annual reports:
+https://www.samsung.com/global/ir/financial-information/earnings-release/
+
+5. Board of Directors / governance:
+https://www.samsung.com/global/ir/governance-csr/board-of-directors/
+
+6. Official newsroom:
+https://news.samsung.com/global/
+
+7. Google News search for independent coverage:
+https://news.google.com/search?q=Samsung
+
+STEPS:
+1. Open the official website and record company background.
+2. Find history, products and business activities.
+3. Open the governance/Board page and record key executives/directors.
+4. Open Investor Relations and find annual reports or financial results.
+5. Record revenue/profit only with the reporting period and currency.
+6. Search the newsroom for partnerships and announcements.
+7. Search independent news for recent coverage.
+8. Record source URLs and dates.
+9. Cross-check important facts against another reliable source.
+10. Summarise the company profile.
+
+INFORMATION TO COLLECT:
+- Company history
+- Products and services
+- Key executives
+- Financial data
+- Partnerships
+- Recent news
+- Sources and dates
+
+B) THEORY TO WRITE
+
+BACKGROUND:
+Company OSINT is the collection and analysis of publicly available information about an organisation. It may include company history, products, leadership, financial reports, partnerships and news coverage. Official websites and investor-relations reports are useful primary sources, while independent news sources provide additional context. Important facts should be cross-checked, and financial figures should include the reporting period. The objective is to create an evidence-based company profile without accessing private or restricted information.
+
+OPEN-SOURCE TOOL:
+A company's official website, investor-relations portal, newsroom and public search engines are useful OSINT sources. The official website provides background and product information; investor relations provides annual reports and financial statements; the newsroom lists company announcements. Independent news reports help cross-check claims. These sources are publicly accessible, although financial information must be read with attention to dates and reporting periods.
+
+PERFORMANCE STEPS:
+1. Select a company.
+2. Visit its official website.
+3. Collect background, products and services.
+4. Find key executives and governance information.
+5. Collect financial information from official reports.
+6. Identify partnerships and recent news.
+7. Cross-check important facts and record source URLs.
+
+CONCLUSION:
+A company profile was prepared using public sources covering its background, leadership, financial information, partnerships and news.
+
+
+============================================================
+FINAL EXAM REMINDERS
+============================================================
+
+1. Choose a tool that directly fits the experiment.
+2. Write the tool name and URL.
+3. Perform the practical and record actual findings.
+4. Include URLs and dates as evidence.
+5. Write the theory/background in 50–100 words.
+6. Write about the open-source tool in around 50 words.
+7. List performance steps clearly.
+8. Finish with a short conclusion/result.
+9. Never invent findings, metrics, GPS coordinates or financial data.
+10. Use only publicly accessible information.
